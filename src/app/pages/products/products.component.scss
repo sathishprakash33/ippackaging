@@ -1,0 +1,63 @@
+.stack {
+  display: grid;
+  gap: 18px;
+  margin-bottom: 32px;
+}
+
+.product {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.product__main {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+
+  .card__icon {
+    flex: none;
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+}
+
+.product__points {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    position: relative;
+    padding-left: 26px;
+    color: var(--muted);
+
+    &::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #1a8f4c;
+      font-weight: 800;
+    }
+  }
+}
+
+.sizes-card .sizes {
+  margin-top: 18px;
+}
+
+.cta {
+  margin-top: 32px;
+}
+
+@media (max-width: 820px) {
+  .product {
+    grid-template-columns: 1fr;
+  }
+}

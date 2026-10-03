@@ -1,0 +1,45 @@
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow anim-up">Catalogue</p>
+    <h1 class="anim-up" style="--d: 100ms">Products</h1>
+    <p class="anim-up" style="--d: 200ms">Courier covers, POD bags, cardboard boxes, and bulk supply.</p>
+  </div>
+</section>
+
+<section class="section wrap">
+  <div class="stack">
+    @for (product of products; track product.slug; let i = $index) {
+      <article class="card card--product product" appReveal [revealDelay]="i * 80">
+        <span class="card__num">0{{ i + 1 }}</span>
+        <div class="product__main">
+          <span class="card__icon"><app-product-icon [name]="product.icon" /></span>
+          <div>
+            <h2>{{ product.name }}</h2>
+            <p class="muted">{{ product.blurb }}</p>
+          </div>
+        </div>
+        <ul class="product__points">
+          @for (point of product.points; track point) {
+            <li>{{ point }}</li>
+          }
+        </ul>
+      </article>
+    }
+  </div>
+
+  <section class="card sizes-card" appReveal>
+    <h2>Courier / POD sizes</h2>
+    <p class="muted">Popular formats. Ask on Instagram for 100-pc rates and stock.</p>
+    <ul class="sizes" appReveal>
+      @for (size of sizes; track size; let i = $index) {
+        <li [style.--i]="i">{{ size }}</li>
+      }
+    </ul>
+  </section>
+
+  <p class="cta" appReveal>
+    <a class="btn btn--shine" [href]="site.instagramUrl" target="_blank" rel="noopener noreferrer">
+      Enquire on Instagram <span class="btn__arrow">→</span>
+    </a>
+  </p>
+</section>

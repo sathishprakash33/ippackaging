@@ -1,0 +1,19 @@
+<footer class="foot">
+  <div class="wrap foot__grid">
+    <div>
+      <p class="foot__brand">{{ site.name }}</p>
+      <p class="muted">{{ site.tagline }}</p>
+    </div>
+    <nav>
+      <a routerLink="/">Home</a>
+      <a routerLink="/products">Products</a>
+      <a routerLink="/about">About</a>
+      <a routerLink="/contact">Contact</a>
+    </nav>
+    <div>
+      <a [href]="site.instagramUrl" target="_blank" rel="noopener noreferrer">{{ site.instagramLabel }}</a>
+      <p class="muted">{{ site.city }} · {{ site.hours }}</p>
+    </div>
+  </div>
+  <p class="wrap foot__copy">© {{ year }} {{ site.name }}. All rights reserved.</p>
+</footer>

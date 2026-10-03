@@ -1,0 +1,33 @@
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow anim-up">About</p>
+    <h1 class="anim-up" style="--d: 100ms">{{ site.name }}</h1>
+    <p class="anim-up" style="--d: 200ms">{{ site.tagline }}</p>
+  </div>
+</section>
+
+<section class="section wrap about">
+  <div class="card prose" appReveal>
+    <p>
+      {{ site.name }} supplies everyday packaging for courier and e-commerce dispatch:
+      covers, POD bags, jackets, and cardboard boxes in all common sizes.
+    </p>
+    <p>
+      The range is built for shops, logistics teams, and bulk buyers who need repeatable
+      sizes and straightforward wholesale supply.
+    </p>
+    <p>
+      Follow {{ site.instagramLabel }} for current stock, size charts, and bulk enquiries.
+    </p>
+    <a class="btn" routerLink="/contact">Contact us <span class="btn__arrow">→</span></a>
+  </div>
+
+  <div class="about__list">
+    @for (item of highlights; track item.title; let i = $index) {
+      <article class="card" appReveal [revealDelay]="150 + i * 120">
+        <h3>{{ item.title }}</h3>
+        <p class="muted">{{ item.text }}</p>
+      </article>
+    }
+  </div>
+</section>

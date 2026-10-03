@@ -1,0 +1,39 @@
+.foot {
+  margin-top: 64px;
+  padding: 40px 0 28px;
+  background: #071224;
+  color: #d7e0ee;
+}
+
+.foot__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 24px;
+}
+
+.foot__brand {
+  margin: 0 0 8px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.foot a {
+  display: block;
+  color: #d7e0ee;
+  text-decoration: none;
+  margin-bottom: 8px;
+}
+
+.foot__copy {
+  margin: 28px auto 0;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 13px;
+  color: #8ea0b8;
+}
+
+@media (max-width: 820px) {
+  .foot__grid {
+    grid-template-columns: 1fr;
+  }
+}

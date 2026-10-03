@@ -1,0 +1,32 @@
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow anim-up">Contact</p>
+    <h1 class="anim-up" style="--d: 100ms">Bulk orders &amp; enquiries</h1>
+    <p class="anim-up" style="--d: 200ms">Message us with size, quantity, and city. We will share current rates.</p>
+  </div>
+</section>
+
+<section class="section wrap">
+  <div class="cards cards--3">
+    <article class="card" appReveal>
+      <h2>Instagram</h2>
+      <p>{{ site.instagramLabel }}</p>
+      <a class="btn btn--sm btn--shine" [href]="site.instagramUrl" target="_blank" rel="noopener noreferrer">
+        Open profile <span class="btn__arrow">→</span>
+      </a>
+    </article>
+    <article class="card" appReveal [revealDelay]="120">
+      <h2>Hours</h2>
+      <p>{{ site.hours }}</p>
+      <p class="muted">{{ site.city }}</p>
+    </article>
+    <article class="card" appReveal [revealDelay]="240">
+      <h2>What to send</h2>
+      <ul>
+        <li>Product type (cover, POD bag, box)</li>
+        <li>Size and quantity</li>
+        <li>Delivery city</li>
+      </ul>
+    </article>
+  </div>
+</section>
