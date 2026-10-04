@@ -1,31 +1,45 @@
 <header class="nav" [class.is-scrolled]="scrolled">
   <div class="nav__bar wrap">
     <a class="brand" routerLink="/" (click)="closeMenu()">
-      <span class="brand__mark" aria-hidden="true">{{ site.shortName }}</span>
+      <app-brand-logo [size]="46" />
       <span class="brand__text">
         <strong>LP PACKAGING</strong>
-        <small>Packaging Partner</small>
+        <small>Packaging Expert</small>
       </span>
     </a>
 
-    <button
-      class="nav__toggle"
-      type="button"
-      [class.is-open]="menuOpen"
-      [attr.aria-expanded]="menuOpen"
-      aria-label="Toggle menu"
-      (click)="toggleMenu()"
-    >
-      <span></span>
-      <span></span>
-    </button>
+    <div class="nav__actions">
+      <button type="button" class="nav__cart" aria-label="Open cart" (click)="openCart()">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zM7.16 14h9.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49a1 1 0 00-.87-1.48H5.21L4.27 2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.7-1.26h.26z"
+          />
+        </svg>
+        @if (cart.lines().length > 0) {
+          <span class="nav__cart-badge">{{ cart.lines().length }}</span>
+        }
+      </button>
 
-    <nav class="nav__links" [class.is-open]="menuOpen">
-      <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Home</a>
-      <a routerLink="/products" routerLinkActive="is-active" (click)="closeMenu()">Products</a>
-      <a routerLink="/about" routerLinkActive="is-active" (click)="closeMenu()">About</a>
-      <a routerLink="/contact" routerLinkActive="is-active" (click)="closeMenu()">Contact</a>
-      <a class="btn btn--sm" [href]="site.instagramUrl" target="_blank" rel="noopener noreferrer">Instagram</a>
-    </nav>
+      <button
+        class="nav__toggle"
+        type="button"
+        [class.is-open]="menuOpen"
+        [attr.aria-expanded]="menuOpen"
+        aria-label="Toggle menu"
+        (click)="toggleMenu()"
+      >
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="nav__links" [class.is-open]="menuOpen">
+        <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Home</a>
+        <a routerLink="/products" routerLinkActive="is-active" (click)="closeMenu()">Products</a>
+        <a routerLink="/about" routerLinkActive="is-active" (click)="closeMenu()">About</a>
+        <a routerLink="/contact" routerLinkActive="is-active" (click)="closeMenu()">Contact</a>
+        <button type="button" class="btn btn--sm btn--wa-nav nav__wa" (click)="chatWhatsApp()">WhatsApp</button>
+      </nav>
+    </div>
   </div>
 </header>

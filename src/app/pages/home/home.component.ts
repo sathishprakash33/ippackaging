@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SITE } from '../../data/site';
+import { openWhatsAppBlank } from '../../core/whatsapp';
 import { BAG_SIZES, HIGHLIGHTS, MARQUEE, PRODUCTS, STATS, STEPS } from '../../data/products';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { CountUpDirective } from '../../shared/count-up.directive';
@@ -34,5 +35,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     clearInterval(this.timer);
+  }
+
+  chatWhatsApp(): void {
+    openWhatsAppBlank();
   }
 }

@@ -1,0 +1,11 @@
+@if (cart.lines().length > 0) {
+  <div class="cart-bar" role="region" aria-label="Selected items">
+    <div class="cart-bar__inner wrap">
+      <div class="cart-bar__summary">
+        <strong>{{ cart.lines().length }} selected</strong>
+        <span class="muted">· {{ formatINR(cart.total()) }}</span>
+      </div>
+      <button type="button" class="cart-bar__btn" (click)="review()">Review order</button>
+    </div>
+  </div>
+}

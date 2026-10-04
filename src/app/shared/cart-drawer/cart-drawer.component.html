@@ -1,0 +1,70 @@
+@if (cart.drawerOpen()) {
+  <div
+    class="cart-backdrop"
+    role="presentation"
+    (click)="onBackdropClick()"
+    (keydown.escape)="cart.closeDrawer()"
+  ></div>
+}
+
+<aside class="cart-drawer" [class.is-open]="cart.drawerOpen()" aria-label="Shopping cart">
+  <header class="cart-drawer__head">
+    <h2>Your cart</h2>
+    <button type="button" class="cart-drawer__close" aria-label="Close cart" (click)="cart.closeDrawer()">
+      ×
+    </button>
+  </header>
+
+  @if (cart.lines().length === 0) {
+    <p class="cart-drawer__empty muted">Cart is empty. Add courier bag sizes from the catalogue.</p>
+    <a class="btn btn--sm" routerLink="/products" (click)="cart.closeDrawer()">Browse products</a>
+  } @else {
+    <ul class="cart-drawer__list">
+      @for (line of cart.lines(); track line.skuId) {
+        @if (getItem(line.skuId); as item) {
+          <li class="cart-line">
+            <div class="cart-line__info">
+              <strong>{{ title(item) }}</strong>
+              <span class="muted">
+                @if (item.lotSize > 1) {
+                  {{ piecesForLots(item, line.lots) }} pcs · {{ formatINR(item.pricePerLot) }}/{{ item.lotLabel }}
+                } @else {
+                  {{ line.lots }} {{ item.lotLabel }}{{ line.lots > 1 ? 's' : '' }}
+                }
+              </span>
+            </div>
+            <div class="cart-line__actions">
+              <div class="qty">
+                <button type="button" aria-label="Decrease quantity" (click)="changeLots(line.skuId, -1)">−</button>
+                <input
+                  type="number"
+                  class="qty__input"
+                  [value]="line.lots"
+                  min="1"
+                  max="999"
+                  aria-label="Lots (1 lot = 100 pcs)"
+                  (change)="setLotsFromInput(line.skuId, $event)"
+                  (keydown.enter)="blurInput($event)"
+                />
+                <button type="button" aria-label="Increase quantity" (click)="changeLots(line.skuId, 1)">+</button>
+              </div>
+              <span class="qty__hint muted">lots</span>
+              <strong class="cart-line__amt">{{ formatINR(lineAmount(item, line.lots)) }}</strong>
+              <button type="button" class="cart-line__remove" (click)="cart.remove(line.skuId)">Remove</button>
+            </div>
+          </li>
+        }
+      }
+    </ul>
+
+    <footer class="cart-drawer__foot">
+      <div class="cart-drawer__total">
+        <span>Estimated total</span>
+        <strong>{{ formatINR(cart.total()) }}</strong>
+      </div>
+      <p class="cart-drawer__note muted">Rates per price list. Final amount confirmed on WhatsApp.</p>
+      <button type="button" class="btn btn--wa btn--block" (click)="placeOrder()">Place order on WhatsApp</button>
+      <button type="button" class="btn btn--ghost-dark btn--block btn--sm" (click)="cart.clear()">Clear cart</button>
+    </footer>
+  }
+</aside>

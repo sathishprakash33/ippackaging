@@ -23,11 +23,11 @@
       <p class="hero__copy anim-up" style="--d: 360ms">{{ site.description }}</p>
       <div class="hero__actions anim-up" style="--d: 480ms">
         <a class="btn btn--shine" routerLink="/products">
-          View products <span class="btn__arrow">→</span>
+          Shop &amp; add to cart <span class="btn__arrow">→</span>
         </a>
-        <a class="btn btn--ghost" [href]="site.instagramUrl" target="_blank" rel="noopener noreferrer">
-          Message on Instagram
-        </a>
+        <button type="button" class="btn btn--ghost" (click)="chatWhatsApp()">
+          Order on WhatsApp
+        </button>
       </div>
     </div>
 
@@ -131,7 +131,7 @@
     <div class="section-head" appReveal>
       <p class="eyebrow">Sizes</p>
       <h2>Popular bag sizes</h2>
-      <p class="muted">Enquire for current 100-piece rates and custom sizes.</p>
+      <p class="muted">Rates on the products page — order via cart &amp; WhatsApp.</p>
     </div>
     <ul class="sizes" appReveal>
       @for (size of sizes; track size; let i = $index) {
@@ -147,8 +147,8 @@
       <h2>Need packaging in bulk?</h2>
       <p>Send your size and quantity, and we will reply with today's rate.</p>
     </div>
-    <a class="btn btn--light btn--pulse" [href]="site.instagramUrl" target="_blank" rel="noopener noreferrer">
-      Message on Instagram <span class="btn__arrow">→</span>
+    <a class="btn btn--pulse" routerLink="/products">
+      Browse catalogue <span class="btn__arrow">→</span>
     </a>
   </div>
 </section>

@@ -66,12 +66,12 @@ export const MARQUEE = [
 
 export const STEPS = [
   {
-    title: 'Share your need',
-    text: 'Send the product, size, and quantity on Instagram.',
+    title: 'Pick sizes',
+    text: 'Add courier bag sizes to your cart on the website.',
   },
   {
-    title: 'Get a quote',
-    text: 'We confirm stock and the current bulk rate.',
+    title: 'Order on WhatsApp',
+    text: 'Place order with one tap — we confirm stock and delivery.',
   },
   {
     title: 'Packed & dispatched',

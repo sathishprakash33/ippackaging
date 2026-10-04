@@ -2,31 +2,43 @@
   <div class="wrap">
     <p class="eyebrow anim-up">Contact</p>
     <h1 class="anim-up" style="--d: 100ms">Bulk orders &amp; enquiries</h1>
-    <p class="anim-up" style="--d: 200ms">Message us with size, quantity, and city. We will share current rates.</p>
+    <p class="anim-up" style="--d: 200ms">
+      Use the website cart for sizes &amp; rates, then WhatsApp to confirm. Call only if you need urgent help.
+    </p>
   </div>
 </section>
 
 <section class="section wrap">
   <div class="cards cards--3">
     <article class="card" appReveal>
+      <h2>WhatsApp</h2>
+      <p>{{ site.phone }}</p>
+      <p class="muted">Fastest for orders &amp; stock check</p>
+      <button type="button" class="btn btn--sm btn--wa" (click)="orderOnWhatsApp()">
+        Chat on WhatsApp <span class="btn__arrow">→</span>
+      </button>
+    </article>
+    <article class="card" appReveal [revealDelay]="120">
       <h2>Instagram</h2>
       <p>{{ site.instagramLabel }}</p>
       <a class="btn btn--sm btn--shine" [href]="site.instagramUrl" target="_blank" rel="noopener noreferrer">
         Open profile <span class="btn__arrow">→</span>
       </a>
     </article>
-    <article class="card" appReveal [revealDelay]="120">
+    <article class="card" appReveal [revealDelay]="240">
       <h2>Hours</h2>
       <p>{{ site.hours }}</p>
       <p class="muted">{{ site.city }}</p>
     </article>
-    <article class="card" appReveal [revealDelay]="240">
-      <h2>What to send</h2>
-      <ul>
-        <li>Product type (cover, POD bag, box)</li>
-        <li>Size and quantity</li>
-        <li>Delivery city</li>
-      </ul>
-    </article>
   </div>
+
+  <article class="card contact-tip" appReveal>
+    <h2>What to send on WhatsApp</h2>
+    <ul>
+      <li>Product size (from cart or catalogue)</li>
+      <li>Quantity in 100-pc lots</li>
+      <li>Delivery city &amp; pincode</li>
+    </ul>
+    <a class="btn btn--sm" routerLink="/products">Open product catalogue</a>
+  </article>
 </section>

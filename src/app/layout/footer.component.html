@@ -11,6 +11,7 @@
       <a routerLink="/contact">Contact</a>
     </nav>
     <div>
+      <button type="button" class="foot__wa" (click)="chatWhatsApp()">WhatsApp {{ site.phone }}</button>
       <a [href]="site.instagramUrl" target="_blank" rel="noopener noreferrer">{{ site.instagramLabel }}</a>
       <p class="muted">{{ site.city }} · {{ site.hours }}</p>
     </div>

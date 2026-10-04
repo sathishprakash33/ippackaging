@@ -1,12 +1,76 @@
-<section class="page-head">
+<section class="page-head page-head--shop">
   <div class="wrap">
     <p class="eyebrow anim-up">Catalogue</p>
-    <h1 class="anim-up" style="--d: 100ms">Products</h1>
-    <p class="anim-up" style="--d: 200ms">Courier covers, POD bags, cardboard boxes, and bulk supply.</p>
+    <h1 class="anim-up" style="--d: 100ms">Courier POD bags</h1>
+    <p class="anim-up page-head__hint" style="--d: 200ms">
+      Tap <strong>+</strong> or type <strong>lots</strong> (1 lot = 100 pcs) · <strong>Review order</strong>
+    </p>
   </div>
 </section>
 
-<section class="section wrap">
+<section class="section wrap shop" [class.shop--has-bar]="cart.lines().length > 0">
+  <div class="shop-strip" appReveal>
+    <span class="shop-strip__pill">MOQ 100 pcs</span>
+    <span>WhatsApp {{ site.phone }}</span>
+  </div>
+
+  <div class="pack-grid">
+    @for (item of catalogue; track item.id; let i = $index) {
+      <article
+        class="pack"
+        [class.pack--active]="lotsFor(item) > 0"
+        appReveal
+        [revealDelay]="i * 25"
+      >
+        <div class="pack__accent" aria-hidden="true"></div>
+
+        <header class="pack__head">
+          @if (item.pod) {
+            <span class="pack__badge">POD</span>
+          }
+          <span class="pack__mark">LP</span>
+        </header>
+
+        <div class="pack__size-block">
+          <p class="pack__size">{{ item.sizeLabel }}</p>
+          <p class="pack__sub">Courier · inches</p>
+        </div>
+
+        <footer class="pack__foot">
+          <div class="pack__price">
+            <strong>{{ formatINR(item.pricePerLot) }}</strong>
+            <span>/ {{ item.lotLabel }}</span>
+          </div>
+
+          @if (lotsFor(item) === 0) {
+            <button type="button" class="pack__add" (click)="addLot(item)" aria-label="Add to order">+</button>
+          } @else {
+            <div class="pack__qty">
+              <button type="button" (click)="removeLot(item)" aria-label="Less">−</button>
+              <input
+                type="number"
+                class="pack__qty-input"
+                [value]="lotsFor(item)"
+                min="1"
+                max="999"
+                aria-label="Number of lots"
+                (change)="setLotsFromInput(item, $event)"
+                (keydown.enter)="blurInput($event)"
+              />
+              <button type="button" (click)="addLot(item)" aria-label="More">+</button>
+            </div>
+          }
+        </footer>
+      </article>
+    }
+  </div>
+
+  <section class="section-head shop-more" appReveal>
+    <p class="eyebrow">Also supply</p>
+    <h2>More packaging lines</h2>
+    <p class="muted">Boxes, covers, and custom bulk — ask on WhatsApp.</p>
+  </section>
+
   <div class="stack">
     @for (product of products; track product.slug; let i = $index) {
       <article class="card card--product product" appReveal [revealDelay]="i * 80">
@@ -26,20 +90,4 @@
       </article>
     }
   </div>
-
-  <section class="card sizes-card" appReveal>
-    <h2>Courier / POD sizes</h2>
-    <p class="muted">Popular formats. Ask on Instagram for 100-pc rates and stock.</p>
-    <ul class="sizes" appReveal>
-      @for (size of sizes; track size; let i = $index) {
-        <li [style.--i]="i">{{ size }}</li>
-      }
-    </ul>
-  </section>
-
-  <p class="cta" appReveal>
-    <a class="btn btn--shine" [href]="site.instagramUrl" target="_blank" rel="noopener noreferrer">
-      Enquire on Instagram <span class="btn__arrow">→</span>
-    </a>
-  </p>
 </section>
