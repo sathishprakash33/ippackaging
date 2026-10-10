@@ -1,8 +1,12 @@
-<app-header />
+@if (showStorefront()) {
+  <app-header />
+}
 <main>
   <router-outlet />
 </main>
-<app-footer />
-<app-cart-bar />
-<app-cart-drawer />
-<app-whatsapp-float />
+@if (showStorefront()) {
+  <app-footer />
+  <app-cart-bar />
+  <app-cart-drawer />
+  <app-whatsapp-float />
+}

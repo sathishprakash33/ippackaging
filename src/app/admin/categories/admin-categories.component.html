@@ -1,0 +1,62 @@
+<section class="admin-page">
+  <div class="admin-head">
+    <div>
+      <p class="eyebrow">Groups</p>
+      <h1>Categories</h1>
+      <p class="note">Product groups used when you add an item.</p>
+    </div>
+  </div>
+
+  @if (error()) {
+    <p class="error">{{ error() }}</p>
+  }
+
+  <form class="panel" [formGroup]="form" (ngSubmit)="save()">
+    <label class="field">
+      Name
+      <input formControlName="name" />
+    </label>
+    <div class="actions">
+      <button class="btn" type="submit">{{ editingId() ? 'Update' : 'Add category' }}</button>
+      @if (editingId()) {
+        <button class="btn ghost" type="button" (click)="reset()">Cancel</button>
+      }
+    </div>
+  </form>
+
+  <div class="panel table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (group of groups(); track group.id) {
+          <tr>
+            <td>{{ group.name }}</td>
+            <td>
+              <div class="icon-actions">
+                <button class="icon-btn" type="button" aria-label="Edit" (click)="edit(group)">
+                  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                  </svg>
+                </button>
+                <button class="icon-btn icon-btn--danger" type="button" aria-label="Delete" (click)="remove(group)">
+                  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <path fill="currentColor" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
+                  </svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="2">No categories yet.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

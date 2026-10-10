@@ -1,0 +1,100 @@
+<section class="admin-page">
+  <div class="admin-head">
+    <div>
+      <p class="eyebrow">Shipping</p>
+      <h1>Courier rates</h1>
+      <p class="note">State-wise rates. Each row is a weight range in grams.</p>
+    </div>
+    <button class="btn ghost" type="button" (click)="startNew()">New state</button>
+  </div>
+
+  @if (error()) {
+    <p class="error">{{ error() }}</p>
+  }
+
+  <div class="panel">
+    <div class="grid">
+      <label class="field">
+        State
+        <input [(ngModel)]="stateName" name="stateName" />
+      </label>
+      <label class="checks">
+        <input type="checkbox" [(ngModel)]="isActive" name="isActive" /> Active
+      </label>
+    </div>
+
+    @for (slab of slabs; track $index) {
+      <div class="grid" style="margin-top: 12px">
+        <label class="field">
+          From (g)
+          <input type="number" min="1" [(ngModel)]="slab.fromGrams" [name]="'from' + $index" />
+        </label>
+        <label class="field">
+          To (g)
+          <input type="number" min="1" [(ngModel)]="slab.toGrams" [name]="'to' + $index" />
+        </label>
+        <label class="field">
+          Rate
+          <input type="number" min="0" step="0.01" [(ngModel)]="slab.rateAmount" [name]="'rate' + $index" />
+        </label>
+        <label class="field">
+          Currency
+          <select [(ngModel)]="slab.currencyId" [name]="'currency' + $index">
+            @for (currency of bootstrap()?.currencies ?? []; track currency.id) {
+              <option [ngValue]="currency.id">{{ currency.currencyCode }}</option>
+            }
+          </select>
+        </label>
+      </div>
+      <div class="actions">
+        <label class="checks">
+          <input type="checkbox" [(ngModel)]="slab.isEnabled" [name]="'enabled' + $index" /> Enabled
+        </label>
+        <button class="btn ghost" type="button" (click)="removeSlab($index)">Remove row</button>
+      </div>
+    }
+
+    <div class="actions">
+      <button class="btn ghost" type="button" (click)="addSlab()">Add weight row</button>
+      <button class="btn" type="button" (click)="save()">{{ zoneId() ? 'Update rates' : 'Save state' }}</button>
+    </div>
+  </div>
+
+  <div class="panel table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>State</th>
+          <th>Rows</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (zone of bootstrap()?.zones ?? []; track zone.id) {
+          <tr>
+            <td>{{ zone.stateName }} {{ zone.isActive ? '' : '(inactive)' }}</td>
+            <td>{{ zone.slabs.length }}</td>
+            <td>
+              <div class="icon-actions">
+                <button class="icon-btn" type="button" aria-label="Edit" (click)="edit(zone)">
+                  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                  </svg>
+                </button>
+                <button class="icon-btn icon-btn--danger" type="button" aria-label="Delete" (click)="remove(zone)">
+                  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <path fill="currentColor" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
+                  </svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="3">No courier states yet.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

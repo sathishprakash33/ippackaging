@@ -1,0 +1,51 @@
+<section class="login">
+  <div class="login__bg" aria-hidden="true">
+    <span class="blob blob--a"></span>
+    <span class="blob blob--b"></span>
+    <span class="blob blob--c"></span>
+  </div>
+
+  <div class="login__stage">
+    <div class="login__brand">
+      <a class="brand" routerLink="/">
+        <app-brand-logo [size]="54" />
+        <span>
+          <strong>LP PACKAGING</strong>
+          <small>Packaging Expert</small>
+        </span>
+      </a>
+      <p class="eyebrow">Admin desk</p>
+      <h1>Your complete <span>packaging partner</span></h1>
+      <p class="lead">Products, categories, orders, and courier rates — the same store the website sells from.</p>
+      <ul>
+        <li>Catalogue and prices</li>
+        <li>Customer orders</li>
+        <li>State-wise courier slabs</li>
+      </ul>
+    </div>
+
+    <form class="login__card" [formGroup]="form" (ngSubmit)="submit()">
+      <p class="eyebrow">Sign in</p>
+      <h2>Connect to admin</h2>
+      <p class="muted">The panel opens only after this account connects.</p>
+
+      @if (error()) {
+        <p class="error">{{ error() }}</p>
+      }
+
+      <label class="field">
+        Username
+        <input formControlName="username" autocomplete="username" placeholder="admin" />
+      </label>
+      <label class="field">
+        Password
+        <input formControlName="password" type="password" autocomplete="current-password" placeholder="Your password" />
+      </label>
+
+      <button class="btn" type="submit" [disabled]="busy()">
+        {{ busy() ? 'Connecting…' : 'Connect' }}
+        <span aria-hidden="true">→</span>
+      </button>
+    </form>
+  </div>
+</section>

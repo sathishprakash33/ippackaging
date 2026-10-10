@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { filter, map, startWith } from 'rxjs';
 import { HeaderComponent } from './layout/header.component';
 import { FooterComponent } from './layout/footer.component';
 import { CartDrawerComponent } from './shared/cart-drawer/cart-drawer.component';
@@ -19,4 +21,14 @@ import { WhatsappFloatComponent } from './shared/whatsapp-float/whatsapp-float.c
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {}
+export class AppComponent {
+  private readonly router = inject(Router);
+  readonly showStorefront = toSignal(
+    this.router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+      map((event) => !event.urlAfterRedirects.startsWith('/admin')),
+      startWith(!this.router.url.startsWith('/admin')),
+    ),
+    { initialValue: !this.router.url.startsWith('/admin') },
+  );
+}

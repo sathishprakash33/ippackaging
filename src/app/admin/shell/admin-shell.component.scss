@@ -1,0 +1,147 @@
+.shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(700px 240px at 100% 0%, rgba(186, 230, 253, 0.55), transparent 60%),
+    linear-gradient(180deg, #f8fbfe 0%, var(--cream) 40%, #f2f6fa 100%);
+}
+
+.bar {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 0 22px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.tabs {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  min-height: 64px;
+
+  a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 18px 16px 16px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+
+    svg {
+      opacity: 0.7;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 0;
+      height: 3px;
+      border-radius: 3px 3px 0 0;
+      background: linear-gradient(90deg, var(--red), var(--gold));
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.25s var(--ease);
+    }
+
+    &:hover {
+      color: var(--navy);
+    }
+
+    &:hover svg,
+    &.is-active svg {
+      opacity: 1;
+    }
+
+    &.is-active {
+      color: var(--navy-dark);
+    }
+
+    &.is-active::after {
+      transform: scaleX(1);
+    }
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  gap: 10px;
+  color: inherit;
+  text-decoration: none;
+  min-width: 0;
+
+  span {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  strong {
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: var(--navy);
+  }
+
+  small {
+    color: #9a7b4f;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+}
+
+.who {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  gap: 10px;
+
+  span {
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  button {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 14px;
+    background: #fff;
+    color: var(--navy-dark);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+
+    &:hover {
+      border-color: var(--red);
+      color: var(--red);
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .bar {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .tabs {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    min-height: 0;
+  }
+}
